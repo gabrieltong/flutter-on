@@ -62,21 +62,21 @@ class LoginFormState extends State<LoginForm> {
             // ),
             Switch(
               value: this.isTeacher,
-              onChanged: (value){
-                setState((){
+              onChanged: (value) {
+                setState(() {
                   this.isTeacher = value;
                 });
-                
               },
             ),
             SizedBox(
               width: double.infinity,
               child: RaisedButton(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0)
-                ),
+                    borderRadius: BorderRadius.circular(30.0)),
                 // color: Colors.red,
-                onPressed: (){},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/teacher_courses');
+                },
                 padding: const EdgeInsets.all(0),
                 child: Container(
                   width: 200,
