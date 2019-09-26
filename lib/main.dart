@@ -1,4 +1,6 @@
 import 'package:f_on/page/login.dart';
+import 'package:f_on/page/schedule_stat.dart';
+import 'package:f_on/page/teacher_course.dart';
 import 'package:f_on/page/teacher_courses.dart';
 import 'package:flutter/material.dart';
 
@@ -75,6 +77,8 @@ class _MyHomePageState extends State<MyHomePage> {
       routes: {
         '/': (context) => LoginScreen(),
         '/teacher_courses': (context) => TeacherCoursesScreen(),
+        '/teacher_course': (context) => TeacherCourseScreen(),
+        '/schedule_stat': (context) => ScheduleStatScreen(),
       },
     );
   }
