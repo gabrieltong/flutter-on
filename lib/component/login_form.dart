@@ -51,6 +51,7 @@ class LoginFormState extends State<LoginForm> {
                 return null;
               },
             ),
+
             Container(
               height: 50,
             ),
@@ -80,14 +81,6 @@ class LoginFormState extends State<LoginForm> {
                 padding: const EdgeInsets.all(0),
                 child: Container(
                   width: 200,
-                  // decoration: BoxDecoration(
-                  //   gradient: LinearGradient(
-                  //     colors: <Color>[
-                  //       Color.fromRGBO(0, 170, 154, 1.0),
-                  //       Color.fromRGBO(0, 170, 154, 1.0),
-                  //     ],
-                  //   ),
-                  // ),
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
                     "登陆",
@@ -97,6 +90,12 @@ class LoginFormState extends State<LoginForm> {
                 ),
               ),
             ),
+            RaisedButton(
+              child: Text("学生登陆"),
+              onPressed: () {
+                Navigator.pushNamed(context, '/classrooms');
+              },
+            )
           ],
         ));
   }

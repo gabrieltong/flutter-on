@@ -9,8 +9,6 @@ class TeacherCourse extends StatefulWidget {
 
 class TeacherCourseState extends State<TeacherCourse> {
   Widget build(BuildContext context) {
-    // <Widget>[] children = <Widget>[];
-    // children.
     return Container(
       child: Column(
         mainAxisSize: MainAxisSize.min,

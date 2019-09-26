@@ -1,4 +1,9 @@
+import 'package:f_on/page/classroom.dart';
+import 'package:f_on/page/classrooms.dart';
+import 'package:f_on/page/homework.dart';
 import 'package:f_on/page/login.dart';
+import 'package:f_on/page/online.dart';
+import 'package:f_on/page/rounds.dart';
 import 'package:f_on/page/schedule_stat.dart';
 import 'package:f_on/page/teacher_course.dart';
 import 'package:f_on/page/teacher_courses.dart';
@@ -79,6 +84,11 @@ class _MyHomePageState extends State<MyHomePage> {
         '/teacher_courses': (context) => TeacherCoursesScreen(),
         '/teacher_course': (context) => TeacherCourseScreen(),
         '/schedule_stat': (context) => ScheduleStatScreen(),
+        '/classrooms': (context) => ClassroomsScreen(),
+        '/classroom': (context) => ClassroomScreen(),
+        '/rounds': (context) => RoundsScreen(),
+        '/online': (context) => OnlineScreen(),
+        '/homework': (context) => HomeworkScreen(),
       },
     );
   }

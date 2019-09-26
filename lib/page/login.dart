@@ -1,5 +1,5 @@
 import 'package:f_on/component/layouts/default.dart';
-import 'package:f_on/component/loginForm.dart';
+import 'package:f_on/component/login_form.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
