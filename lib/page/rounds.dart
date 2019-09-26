@@ -1,6 +1,6 @@
 import 'package:f_on/component/layouts/default.dart';
-import 'package:f_on/component/schedule_card.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class RoundsScreen extends StatefulWidget {
   @override
@@ -12,7 +12,20 @@ class _RoundsScreenState extends State<RoundsScreen> {
   Widget build(BuildContext context) {
     return DefaultLayout(
         child: ListView(
-      children: <Widget>[Text("Round Screen")],
+      children: <Widget>[
+        ListView(children: <Widget>[
+          ListView(
+            scrollDirection: Axis.horizontal,
+            children: <Widget>[
+              ...List.generate(
+                  20,
+                  (index) => ListTile(
+                        title: Text("$index"),
+                      ))
+            ],
+          )
+        ])
+      ],
     ));
   }
 }
