@@ -1,9 +1,9 @@
-import 'dart:ffi';
 import 'dart:math';
-
+import 'package:video_player/video_player.dart';
 import 'package:f_on/component/layouts/default.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 class RoundsScreen extends StatefulWidget {
   @override
@@ -51,6 +51,24 @@ class Round {
 
 class _RoundsScreenState extends State<RoundsScreen> {
   List<Round> rounds = [];
+  VideoPlayerController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.network(
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4')
+      ..initialize().then((_) {
+        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
 
   void moch() {
     if (rounds.length == 0) {
@@ -77,7 +95,7 @@ class _RoundsScreenState extends State<RoundsScreen> {
     }
   }
 
-  void selectVideo(Video video) {
+  Future<void> selectVideo(Video video) async {
     setState(() {
       var round =
           rounds.firstWhere((_round) => _round.selected, orElse: () => null);
@@ -91,6 +109,16 @@ class _RoundsScreenState extends State<RoundsScreen> {
         });
       }
     });
+
+    final uint8list = await VideoThumbnail.thumbnailData(
+      video:
+          'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+      imageFormat: ImageFormat.JPEG,
+      maxHeightOrWidth: 128,
+      quality: 25,
+    );
+    print(uint8list);
+    return uint8list;
   }
 
   void selectRound(Round round) {
@@ -159,7 +187,19 @@ class _RoundsScreenState extends State<RoundsScreen> {
       );
       children.add(videosWidget);
     }
-
+    if (_controller.value.initialized) {
+      children.add(AspectRatio(
+        aspectRatio: _controller.value.aspectRatio,
+        child: VideoPlayer(_controller),
+      ));
+      children.add(RaisedButton(onPressed: () {
+        setState(() {
+          _controller.value.isPlaying
+              ? _controller.pause()
+              : _controller.play();
+        });
+      }));
+    }
     return DefaultLayout(child: ListView(children: children));
   }
 }
