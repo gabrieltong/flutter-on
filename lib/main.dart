@@ -8,6 +8,20 @@ import 'package:f_on/page/schedule_stat.dart';
 import 'package:f_on/page/teacher_course.dart';
 import 'package:f_on/page/teacher_courses.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+
+final HttpLink httpLink = HttpLink(
+  uri: 'http://192.168.4.83:5000/graphql',
+);
+
+final token =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZDgwNDZiZDMxYzQ1OWRjYTU5ZjBlZmEiLCJlbWFpbCI6InRlYWNoZXIxQGdtYWlsLmNvbSIsImlhdCI6MTU2OTY1MjA1MSwiZXhwIjoxNTY5NzM4NDUxfQ.TAp74WjlgICs9e6NrjuqQPTDBDPS6FMmNeMYZuWm3yE';
+
+final AuthLink authLink = AuthLink(
+  getToken: () async => "Bearer $token",
+);
+
+final Link link = authLink.concat(httpLink);
 
 void main() => runApp(MyApp());
 
@@ -55,41 +69,44 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-
-    return MaterialApp(
-      title: "唯新在线",
-      theme: ThemeData(
-        fontFamily: 'Rsssht',
-        primaryColor: Color.fromRGBO(0, 61, 80, 1.0),
-        buttonTheme:
-            ButtonThemeData(buttonColor: Color.fromRGBO(0, 170, 154, 1.0)),
-        inputDecorationTheme: InputDecorationTheme(
-            filled: true,
-            fillColor: Color.fromRGBO(28, 88, 104, 1.0),
-            contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-            border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: new BorderRadius.circular(30.0)),
-            hintStyle: TextStyle(color: Colors.white)),
+    ValueNotifier<GraphQLClient> client = ValueNotifier(
+      GraphQLClient(
+        cache: InMemoryCache(),
+        link: link,
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => LoginScreen(),
-        '/teacher_courses': (context) => TeacherCoursesScreen(),
-        '/teacher_course': (context) => TeacherCourseScreen(),
-        '/schedule_stat': (context) => ScheduleStatScreen(),
-        '/classrooms': (context) => ClassroomsScreen(),
-        '/classroom': (context) => ClassroomScreen(),
-        '/rounds': (context) => RoundsScreen(),
-        '/online': (context) => OnlineScreen(),
-        '/homework': (context) => HomeworkScreen(),
-      },
     );
+
+    return GraphQLProvider(
+        client: client,
+        child: MaterialApp(
+          title: "唯新在线",
+          theme: ThemeData(
+            fontFamily: 'Rsssht',
+            primaryColor: Color.fromRGBO(0, 61, 80, 1.0),
+            buttonTheme:
+                ButtonThemeData(buttonColor: Color.fromRGBO(0, 170, 154, 1.0)),
+            inputDecorationTheme: InputDecorationTheme(
+                filled: true,
+                fillColor: Color.fromRGBO(28, 88, 104, 1.0),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: new BorderRadius.circular(30.0)),
+                hintStyle: TextStyle(color: Colors.white)),
+          ),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => LoginScreen(),
+            '/teacher_courses': (context) => TeacherCoursesScreen(),
+            '/teacher_course': (context) => TeacherCourseScreen(),
+            '/schedule_stat': (context) => ScheduleStatScreen(),
+            '/classrooms': (context) => ClassroomsScreen(),
+            '/classroom': (context) => ClassroomScreen(),
+            '/rounds': (context) => RoundsScreen(),
+            '/online': (context) => OnlineScreen(),
+            '/homework': (context) => HomeworkScreen(),
+          },
+        ));
   }
 }
