@@ -22,8 +22,9 @@ dependencies:
   video_player: ^0.10.2+1
   bloc: ^0.14.0
   chewie: ^0.9.8
+  graphql_flutter: ^2.0.0
   flutter_bloc: ^0.20.0
-  video_thumbnail: ^0.1.5+1
+  # video_thumbnail: ^0.1.5+1
   flutter:
     sdk: flutter
 

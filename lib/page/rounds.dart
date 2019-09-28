@@ -3,8 +3,6 @@ import 'package:video_player/video_player.dart';
 import 'package:f_on/component/layouts/default.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:video_thumbnail/video_thumbnail.dart';
-import 'package:chewie/chewie.dart';
 
 class RoundsScreen extends StatefulWidget {
   @override
@@ -110,16 +108,6 @@ class _RoundsScreenState extends State<RoundsScreen> {
         });
       }
     });
-
-    final uint8list = await VideoThumbnail.thumbnailData(
-      video:
-          'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-      imageFormat: ImageFormat.JPEG,
-      maxHeightOrWidth: 128,
-      quality: 25,
-    );
-    print(uint8list);
-    return uint8list;
   }
 
   void selectRound(Round round) {
