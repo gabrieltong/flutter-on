@@ -1,4 +1,5 @@
 import 'package:f_on/models/classroom.dart';
+import 'package:f_on/models/share.dart';
 import 'package:flutter/material.dart';
 
 class TeacherCourse extends StatefulWidget {
@@ -14,6 +15,24 @@ class TeacherCourse extends StatefulWidget {
 
 class TeacherCourseState extends State<TeacherCourse> {
   Widget build(BuildContext context) {
+    List<Widget> schdules = [];
+    widget.classroom.schedules.forEach((schedule) {
+      schdules.add(Card(
+          child: ListTile(
+              leading: FlutterLogo(size: 56.0),
+              title: Text(schedule.lesson.intro),
+              subtitle: Text(schedule.sTime),
+              trailing: Stack(
+                children: <Widget>[
+                  InkWell(
+                      child: Icon(Icons.work),
+                      onTap: () {
+                        Navigator.pushNamed(context, '/schedule_stat',
+                            arguments: new IDArg(schedule.id));
+                      }),
+                ],
+              ))));
+    });
     return Container(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -29,29 +48,15 @@ class TeacherCourseState extends State<TeacherCourse> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Image.network(widget.classroom.courseVersion.course.image.url),
+                      Image.network(
+                          widget.classroom.courseVersion.course.image.url),
                       ListTile(
                         title: Text(widget.classroom.name),
                         subtitle: Text("课程总数"),
                       )
                     ],
                   ))),
-          ...(List.generate(
-              5,
-              (index) => Card(
-                  child: ListTile(
-                      leading: FlutterLogo(size: 56.0),
-                      title: Text("政治第${index + 1}回"),
-                      subtitle: Text('09-17 15:45'),
-                      trailing: Stack(
-                        children: <Widget>[
-                          InkWell(
-                              child: Icon(Icons.work),
-                              onTap: () {
-                                Navigator.pushNamed(context, '/schedule_stat');
-                              }),
-                        ],
-                      )))))
+          ...schdules
         ],
       ),
     );

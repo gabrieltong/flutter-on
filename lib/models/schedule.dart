@@ -13,6 +13,10 @@ class Schedule {
   Lesson lesson;
   Classroom classroom;
 
+  String get sTime{
+    return startTime == null ? '' : startTime.toIso8601String();
+  }
+  
   Schedule(
       {@required this.id,
       this.status,

@@ -6,10 +6,12 @@ import 'package:flutter/foundation.dart';
 
 class Lesson {
   final String id;
-  CourseVersion courseVersion;
+
   String intro;
   String contents;
   String points;
+
+  CourseVersion courseVersion;
   List<Round> rounds;
   List<Series> serieses;
   Online online;
@@ -17,7 +19,11 @@ class Lesson {
   Lesson({@required this.id, this.intro, this.contents, this.points});
 
   factory Lesson.fromJSON(Map<String, dynamic> json) {
-    var lesson = new Lesson(id: json['_id']);
+    var lesson = new Lesson(
+        id: json['_id'],
+        intro: json['intro'],
+        contents: json['contents'],
+        points: json['points']);
 
     if (json['rounds'] is List) {
       (json['rounds'] as List).forEach((_json) {
