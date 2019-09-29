@@ -1,6 +1,7 @@
 import 'package:f_on/component/layouts/default.dart';
 import 'package:f_on/component/teacher_courses.dart';
 import 'package:f_on/graphql/teacherClassroomAPI.dart';
+import 'package:f_on/models/classroom.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
@@ -20,18 +21,26 @@ class _TeacherCoursesScreenState extends State<TeacherCoursesScreen> {
         builder: (QueryResult result,
             {VoidCallback refetch, FetchMore fetchMore}) {
           if (result.errors != null) {
-            return Text(result.errors.toString());
+            return Center(child: Text(result.errors.toString()));
           }
 
           if (result.loading) {
-            return Text('Loading');
+            return new Center(
+              child: new CircularProgressIndicator(),
+            );
           }
           print(result.data);
+
+          List<Classroom> classrooms = [];
+          (result.data['teacherClassrooms']['classrooms'] as List)
+              .forEach((json) {
+            classrooms.add(Classroom.fromJSON(json));
+          });
 
           // it can be either Map or List
           // List repositories = result.data['viewer']['repositories']['nodes'];
 
-          return DefaultLayout(child: TeacherCourses());
+          return DefaultLayout(child: TeacherCourses(classrooms: classrooms));
         });
   }
 }

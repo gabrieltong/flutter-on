@@ -15,7 +15,7 @@ final HttpLink httpLink = HttpLink(
 );
 
 final token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZDgwNDZiZDMxYzQ1OWRjYTU5ZjBlZmEiLCJlbWFpbCI6InRlYWNoZXIxQGdtYWlsLmNvbSIsImlhdCI6MTU2OTY1MjA1MSwiZXhwIjoxNTY5NzM4NDUxfQ.TAp74WjlgICs9e6NrjuqQPTDBDPS6FMmNeMYZuWm3yE';
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZDgwNDZiZDMxYzQ1OWRjYTU5ZjBlZmEiLCJlbWFpbCI6InRlYWNoZXIxQGdtYWlsLmNvbSIsImlhdCI6MTU2OTczOTM2MywiZXhwIjoxNTY5ODI1NzYzfQ.0YYowDNV51O1gbkRN8jmMAXeeOFhriSGOSQc3WIpOuM';
 
 final AuthLink authLink = AuthLink(
   getToken: () async => "Bearer $token",

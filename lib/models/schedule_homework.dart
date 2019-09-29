@@ -1,6 +1,5 @@
 import 'package:f_on/models/question_path.dart';
 import 'package:f_on/models/schedule.dart';
-import 'package:f_on/models/student_homework.dart';
 
 class ScheduleHomework {
   final String id;

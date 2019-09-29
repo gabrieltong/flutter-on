@@ -1,6 +1,11 @@
+import 'package:f_on/models/classroom.dart';
 import 'package:flutter/material.dart';
 
 class TeacherCourse extends StatefulWidget {
+  final Classroom classroom;
+
+  TeacherCourse({Key key, this.classroom}) : super(key: key);
+
   @override
   TeacherCourseState createState() {
     return TeacherCourseState();
@@ -24,11 +29,10 @@ class TeacherCourseState extends State<TeacherCourse> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Image.asset('assets/images/courses/1.png'),
-                      const ListTile(
-                        title: Text('The Enchanted Nightingale'),
-                        subtitle: Text(
-                            'Music by Julie Gable. Lyrics by Sidney Stein.'),
+                      Image.network(widget.classroom.courseVersion.course.image.url),
+                      ListTile(
+                        title: Text(widget.classroom.name),
+                        subtitle: Text("课程总数"),
                       )
                     ],
                   ))),
