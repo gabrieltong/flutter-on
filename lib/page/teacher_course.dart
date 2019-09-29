@@ -2,13 +2,9 @@ import 'package:f_on/component/layouts/default.dart';
 import 'package:f_on/component/teacher_course.dart';
 import 'package:f_on/graphql/teacherClassroomAPI.dart';
 import 'package:f_on/models/classroom.dart';
+import 'package:f_on/models/share.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-
-class TCSArgs {
-  final String id;
-  TCSArgs(this.id);
-}
 
 class TeacherCourseScreen extends StatefulWidget {
   @override
@@ -18,7 +14,7 @@ class TeacherCourseScreen extends StatefulWidget {
 class _TeacherCourseScreenState extends State<TeacherCourseScreen> {
   @override
   Widget build(BuildContext context) {
-    final TCSArgs args = ModalRoute.of(context).settings.arguments;
+    final IDArg args = ModalRoute.of(context).settings.arguments;
     return Query(
         options: QueryOptions(
             document:

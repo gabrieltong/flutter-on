@@ -16,9 +16,12 @@ class SalesData {
 class _ScheduleStatScreenState extends State<ScheduleStatScreen> {
   @override
   Widget build(BuildContext context) {
+    
     return DefaultLayout(
         child: Column(children: <Widget>[
-      RaisedButton(child: Text("开始批改"), onPressed: () {}),
+      RaisedButton(child: Text("开始批改"), onPressed: () {
+        
+      }),
       Card(
           child: SfCartesianChart(
               // Initialize category axis

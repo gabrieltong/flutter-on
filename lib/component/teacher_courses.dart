@@ -1,5 +1,5 @@
 import 'package:f_on/models/classroom.dart';
-import 'package:f_on/page/teacher_course.dart';
+import 'package:f_on/models/share.dart';
 import 'package:flutter/material.dart';
 
 class TeacherCourses extends StatefulWidget {
@@ -25,7 +25,7 @@ class TeacherCoursesState extends State<TeacherCourses> {
           child: InkWell(
               onTap: () {
                 Navigator.pushNamed(context, '/teacher_course',
-                    arguments: new TCSArgs(classroom.id));
+                    arguments: new IDArg(classroom.id));
               },
               child: Column(
                 mainAxisSize: MainAxisSize.min,
