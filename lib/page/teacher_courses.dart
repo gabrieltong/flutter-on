@@ -1,6 +1,8 @@
 import 'package:f_on/component/layouts/default.dart';
 import 'package:f_on/component/teacher_courses.dart';
+import 'package:f_on/graphql/teacherClassroomAPI.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 class TeacherCoursesScreen extends StatefulWidget {
   @override
@@ -10,6 +12,26 @@ class TeacherCoursesScreen extends StatefulWidget {
 class _TeacherCoursesScreenState extends State<TeacherCoursesScreen> {
   @override
   Widget build(BuildContext context) {
-    return DefaultLayout(child: TeacherCourses());
+    return Query(
+        options: QueryOptions(
+          document:
+              TEACHER_CLASSROOMS, // this is the query string you just created
+        ),
+        builder: (QueryResult result,
+            {VoidCallback refetch, FetchMore fetchMore}) {
+          if (result.errors != null) {
+            return Text(result.errors.toString());
+          }
+
+          if (result.loading) {
+            return Text('Loading');
+          }
+          print(result.data);
+
+          // it can be either Map or List
+          // List repositories = result.data['viewer']['repositories']['nodes'];
+
+          return DefaultLayout(child: TeacherCourses());
+        });
   }
 }

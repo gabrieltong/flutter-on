@@ -10,11 +10,15 @@ const TEACHER_CLASSROOMS = """
           _id
         }
         course_version {
+          _id
           course {
+            _id
             image {
+              _id
               url
             }
             course_group {
+              _id
               name
             }
           }
